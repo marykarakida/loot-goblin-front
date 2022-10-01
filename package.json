@@ -7,7 +7,12 @@
         "dev": "vite",
         "build": "tsc && vite build",
         "preview": "vite preview",
-        "commit": "git-cz"
+        "commit": "cz"
+    },
+    "husky": {
+        "hooks": {
+            "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
+        }
     },
     "dependencies": {
         "@headlessui/react": "^1.7.3",
