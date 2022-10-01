@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.inverted-border-radius::before {
+    content: '';
+    position: absolute;
+    background-color: transparent;
+}
+
+.inverted-border-left.inverted-border-radius::before {
+    height: 18px;
+    width: 12px;
+    border-top-left-radius: 9px;
+    box-shadow: 0 -8px 0 0 rgb(250, 204, 21);
+    left: 16px;
+}
+
+.inverted-border-right.inverted-border-radius::before {
+    height: 18px;
+    width: 12px;
+    border-top-right-radius: 9px;
+    box-shadow: 0 -8px 0 0 rgb(250, 204, 21);
+    right: 16px;
+}
