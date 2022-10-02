@@ -1,19 +1,51 @@
-import React, { createContext, useMemo, useState } from 'react';
+import React, { createContext, useCallback, useMemo, useState } from 'react';
 
-interface IAuthData {
-    accessToken: string;
+interface SessionData {
+    accessToken: string | undefined;
+    refreshToken: string | null;
 }
+
+type AuthData = Partial<Pick<SessionData, 'accessToken'>>;
 
 interface IAuthContextValues {
-    auth: Partial<IAuthData>;
-    setAuth: (authData: Partial<IAuthData>) => void;
+    auth: AuthData;
+    createSession(data: SessionData): void;
+    getSession(): SessionData;
+    finishSession(): void;
 }
 
-const AuthContext = createContext<IAuthContextValues>({ auth: {}, setAuth: () => {} });
+const defaultValues: IAuthContextValues = {
+    auth: {},
+    createSession: (data: SessionData) => {},
+    getSession: (): SessionData => ({ accessToken: undefined, refreshToken: null }),
+    finishSession: () => {},
+};
+
+const AuthContext = createContext<IAuthContextValues>(defaultValues);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-    const [auth, setAuth] = useState({});
-    const value = useMemo(() => ({ auth, setAuth }), [auth]);
+    const [auth, setAuth] = useState<AuthData>({});
+
+    const createSession = useCallback(({ accessToken, refreshToken }: SessionData) => {
+        localStorage.setItem('loot-goblin-refreshToken', refreshToken as string);
+
+        setAuth({ accessToken });
+    }, []);
+
+    const getSession = useCallback(() => {
+        const refreshToken = localStorage.getItem('loot-goblin-refreshToken');
+        const accessToken = auth.accessToken;
+
+        return { refreshToken, accessToken };
+    }, []);
+
+    const finishSession = useCallback(() => {
+        localStorage.removeItem('loot-goblin-refreshToken');
+
+        setAuth({});
+    }, []);
+
+    const value = useMemo(() => ({ auth, createSession, getSession, finishSession }), [auth]);
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

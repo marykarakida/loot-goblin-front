@@ -7,7 +7,7 @@ import { useAuth } from './useAuth';
 
 export function useAxiosHook(authorization: boolean = false): { useAxios: UseAxios } {
     const refresh = useRefreshToken();
-    const { auth } = useAuth();
+    const { getSession } = useAuth();
 
     const instance = Axios.create({
         baseURL: import.meta.env.VITE_BASE_URL,
@@ -19,7 +19,8 @@ export function useAxiosHook(authorization: boolean = false): { useAxios: UseAxi
             (config) => {
                 const defaultConfig = { ...config };
                 if (!defaultConfig.headers?.authorization) {
-                    defaultConfig.headers!.authorization = `Bearer ${auth?.accessToken}`;
+                    const { accessToken } = getSession();
+                    defaultConfig.headers!.authorization = `Bearer ${accessToken}`;
                 }
                 return defaultConfig;
             },
@@ -44,7 +45,7 @@ export function useAxiosHook(authorization: boolean = false): { useAxios: UseAxi
             instance.interceptors.request.eject(requestIntercept);
             instance.interceptors.response.eject(responseIntercept);
         };
-    }, [auth, refresh]);
+    }, [getSession, refresh]);
 
     return { useAxios: makeUseAxios({ axios: instance }) };
 }
