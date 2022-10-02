@@ -13,52 +13,51 @@ function AppRoutes() {
     return (
         <Routes>
             <Route element={<Layout />}>
-                <Route element={<Header />} />
+                <Route element={<Header />}>
+                    {/* PUBLIC ROUTES */}
+                    <Route
+                        path="/"
+                        element={
+                            <PublicRoute restricted>
+                                <LandingPage />
+                            </PublicRoute>
+                        }
+                    />
+                    <Route
+                        path="/sign-up"
+                        element={
+                            <PublicRoute restricted>
+                                <SignUpPage />
+                            </PublicRoute>
+                        }
+                    />
+                    <Route
+                        path="/sign-in"
+                        element={
+                            <PublicRoute restricted>
+                                <SignInPage />
+                            </PublicRoute>
+                        }
+                    />
 
-                {/* PUBLIC ROUTES */}
-                <Route
-                    path="/"
-                    element={
-                        <PublicRoute restricted>
-                            <LandingPage />
-                        </PublicRoute>
-                    }
-                />
-                <Route
-                    path="/sign-up"
-                    element={
-                        <PublicRoute restricted>
-                            <SignUpPage />
-                        </PublicRoute>
-                    }
-                />
-                <Route
-                    path="/sign-in"
-                    element={
-                        <PublicRoute restricted>
-                            <SignInPage />
-                        </PublicRoute>
-                    }
-                />
-
-                {/* PRIVATE ROUTES */}
-                <Route
-                    path="/user"
-                    element={
-                        <PrivateRoute>
-                            <HomePage />
-                        </PrivateRoute>
-                    }
-                />
-                <Route
-                    path="/character/:id"
-                    element={
-                        <PrivateRoute>
-                            <CharacterPage />
-                        </PrivateRoute>
-                    }
-                />
-
+                    {/* PRIVATE ROUTES */}
+                    <Route
+                        path="/user"
+                        element={
+                            <PrivateRoute>
+                                <HomePage />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/character/:id"
+                        element={
+                            <PrivateRoute>
+                                <CharacterPage />
+                            </PrivateRoute>
+                        }
+                    />
+                </Route>
                 <Route path="*" element={<Navigate to="/" />} />
             </Route>
         </Routes>
