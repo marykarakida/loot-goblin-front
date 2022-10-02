@@ -9,7 +9,7 @@ export function useRefreshToken(): () => Promise<string | void> {
             const refreshToken = localStorage.getItem('loot-goblin-refreshToken');
             const {
                 data: { accessToken },
-            } = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/token/refresh`, { refreshToken });
+            } = await axios.post(`${import.meta.env.VITE_BASE_URL}/auth/refresh`, { refreshToken });
 
             setAuth({ accessToken: accessToken });
             localStorage.setItem('loot-goblin-refreshToken', accessToken);
