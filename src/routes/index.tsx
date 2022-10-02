@@ -50,7 +50,7 @@ function AppRoutes() {
                         }
                     />
                     <Route
-                        path="/character/:id"
+                        path="/characters/:id"
                         element={
                             <PrivateRoute>
                                 <CharacterPage />

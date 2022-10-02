@@ -18,7 +18,7 @@ const textInputsConfigs = [
         name: 'email',
         type: 'text',
         placeholder: 'Email',
-        errorMessage: 'Must contain 8-24 character',
+        errorMessage: 'Must be a valid email',
         required: true,
     },
     {
@@ -63,7 +63,11 @@ export function SignUpPage() {
     const { loading, createAccount } = useSignUp();
 
     const onSubmit = useCallback(async (data: InputsFields) => {
-        await createAccount({ data });
+        try {
+            await createAccount({ data });
+        } catch (err) {
+            console.log(err);
+        }
     }, []);
 
     return (
