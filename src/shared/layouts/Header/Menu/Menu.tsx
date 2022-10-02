@@ -6,7 +6,7 @@ export function Menu() {
     return (
         <>
             <div className="hidden items-center justify-end md:flex md:flex-1">
-                <Link to="/sign-in" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                <Link to="/sign-in" className="text-base font-medium text-gray-700 hover:text-gray-900">
                     Sign in
                 </Link>
                 <Link
