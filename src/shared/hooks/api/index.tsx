@@ -1,3 +1,4 @@
+import { useSignIn } from './useSignIn';
 import { useSignUp } from './useSignUp';
 
-export { useSignUp };
+export { useSignIn, useSignUp };
