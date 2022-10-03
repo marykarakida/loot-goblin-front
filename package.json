@@ -20,6 +20,8 @@
         "axios-hooks": "^4.0.0",
         "query-string": "^7.1.1",
         "react": "^18.2.0",
+        "react-dnd": "^16.0.1",
+        "react-dnd-html5-backend": "^16.0.1",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.36.1",
         "react-router-dom": "^6.4.1"
