@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useRouter } from '../../shared/hooks';
 import { useSignUp } from '../../shared/hooks/api';
 
 import { TextInput } from '../../shared/components/Input';
@@ -52,6 +53,7 @@ const textInputsConfigs = [
 ];
 
 export function SignUpPage() {
+    const { navigate } = useRouter();
     const {
         register,
         handleSubmit,
@@ -65,6 +67,8 @@ export function SignUpPage() {
     const onSubmit = useCallback(async (data: InputsFields) => {
         try {
             await createAccount({ data });
+
+            navigate('/sign-in');
         } catch (err) {
             console.log(err);
         }
