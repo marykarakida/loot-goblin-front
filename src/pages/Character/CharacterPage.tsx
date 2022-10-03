@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Inventory } from '../../shared/components/Inventory';
+
 export function CharacterPage() {
-    return <h1>This is character page</h1>;
+    return <Inventory />;
 }
