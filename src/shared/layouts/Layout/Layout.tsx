@@ -13,8 +13,8 @@ export function Layout() {
     }
 
     return (
-        <div className="h-screen bg-opacity-0 bg-fantasy-ruins bg-cover bg-center bg-no-repeat">
-            <div className="relative h-full px-4 py-9 2xl:container 2xl:mx-auto">
+        <div className="h-screen bg-opacity-0 bg-gradient-to-t from-amber-300 via-purple-200 to-purple-100  bg-cover bg-center bg-no-repeat">
+            <div className="relative h-screen px-4 py-9 2xl:container 2xl:mx-auto">
                 <Top />
                 <Outlet />
             </div>
