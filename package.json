@@ -22,6 +22,7 @@
         "react": "^18.2.0",
         "react-dnd": "^16.0.1",
         "react-dnd-html5-backend": "^16.0.1",
+        "react-dnd-touch-backend": "^16.0.1",
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.36.1",
         "react-router-dom": "^6.4.1"
@@ -29,7 +30,7 @@
     "devDependencies": {
         "@commitlint/cli": "^17.1.2",
         "@commitlint/config-conventional": "^17.1.0",
-        "@types/react": "^18.0.17",
+        "@types/react": "^18.0.21",
         "@types/react-dom": "^18.0.6",
         "@typescript-eslint/eslint-plugin": "^5.38.1",
         "@typescript-eslint/parser": "^5.38.1",
