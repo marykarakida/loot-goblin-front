@@ -26,24 +26,27 @@ const AuthContext = createContext<IAuthContextValues>(defaultValues);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [auth, setAuth] = useState<AuthData>({});
 
-    const createSession = useCallback(({ accessToken, refreshToken }: SessionData) => {
-        localStorage.setItem('loot-goblin-refreshToken', refreshToken as string);
+    const createSession = useCallback(
+        ({ accessToken, refreshToken }: SessionData) => {
+            localStorage.setItem('loot-goblin-refreshToken', refreshToken as string);
 
-        setAuth({ accessToken });
-    }, []);
+            setAuth({ accessToken });
+        },
+        [setAuth]
+    );
 
     const getSession = useCallback(() => {
         const refreshToken = localStorage.getItem('loot-goblin-refreshToken');
         const accessToken = auth.accessToken;
 
         return { refreshToken, accessToken };
-    }, []);
+    }, [auth]);
 
     const finishSession = useCallback(() => {
         localStorage.removeItem('loot-goblin-refreshToken');
 
         setAuth({});
-    }, []);
+    }, [setAuth]);
 
     const value = useMemo(() => ({ auth, createSession, getSession, finishSession }), [auth]);
 
