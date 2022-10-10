@@ -5,27 +5,30 @@ import { Equipment } from './Equipment';
 import { EquipmentData } from './Inventory';
 
 export interface InventorySquareProps {
-    list: { [key: number]: EquipmentData };
+    characterInventory: { [key: number]: any };
     squarePosition: number;
-    dropItemToNewPosition: (from: number, to: number) => void;
+    drop: (equipmentId: string, initialPosition: number, finalPosition: number) => void;
 }
 
 interface DragItem {
+    equipmentId: string;
     equipmentPosition: number;
 }
 
-export const InventorySquare = ({ squarePosition, list, dropItemToNewPosition }: InventorySquareProps) => {
+export const InventorySquare = ({ squarePosition, characterInventory = {}, drop }: InventorySquareProps) => {
     const [, dropBox] = useDrop(
         () => ({
             accept: 'equipment',
-            drop: (item: DragItem) => dropItemToNewPosition(item.equipmentPosition, squarePosition),
+            drop: ({ equipmentId, equipmentPosition }: DragItem) => drop(equipmentId, equipmentPosition, squarePosition),
         }),
-        [dropItemToNewPosition, list]
+        [drop, characterInventory]
     );
 
     return (
-        <div className="m-5 flex h-10 w-10 items-center justify-center bg-blue-400 opacity-25" ref={dropBox}>
-            {!!list[squarePosition] && <Equipment equipment={list[squarePosition]} equipmentPosition={squarePosition} />}
+        <div className="flex aspect-square w-full items-center justify-center border-2 border-black bg-amber-200 p-2" ref={dropBox}>
+            {!!characterInventory[squarePosition] && (
+                <Equipment equipment={characterInventory[squarePosition]} equipmentPosition={squarePosition} />
+            )}
         </div>
     );
 };

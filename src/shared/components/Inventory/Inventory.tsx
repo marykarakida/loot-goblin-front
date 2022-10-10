@@ -1,4 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
+
+import inventoryConfig from '../../../configs/inventoryConfig';
+
+import { useInventory } from '../../hooks';
 
 import { InventorySquare } from './InventorySquare';
 
@@ -12,36 +16,19 @@ interface EquipmentList {
 }
 
 export const Inventory = () => {
-    const [list, setList] = useState<EquipmentList>({
-        0: {
-            id: 'first',
-            text: 'First',
-        },
-        2: {
-            id: 'second',
-            text: 'Second',
-        },
-    });
-
-    const dropItemToNewPosition = useCallback(
-        (from: number, to: number) => {
-            if (!!list[to]) {
-                setList(({ [from]: equipmentBeignDrag, [to]: equipmentBeignSwapped, ...rest }) => ({
-                    ...rest,
-                    [from]: equipmentBeignSwapped,
-                    [to]: equipmentBeignDrag,
-                }));
-            } else {
-                setList(({ [from]: equipment, ...rest }) => ({ ...rest, [to]: equipment }));
-            }
-        },
-        [list, setList]
-    );
+    const { characterInventory, handleSwapEquimentsPostions } = useInventory();
 
     return (
-        <div className="grid w-1/2 grid-cols-5 gap-4">
-            {Array.from({ length: 50 }).map((_, index) => {
-                return <InventorySquare key={index} squarePosition={index} dropItemToNewPosition={dropItemToNewPosition} list={list} />;
+        <div className="mt-44 grid grid-cols-5 xl:grid-cols-10">
+            {Array.from({ length: inventoryConfig.LIMIT_INVENTORY_SPACE }).map((_, index) => {
+                return (
+                    <InventorySquare
+                        key={index}
+                        squarePosition={index}
+                        drop={handleSwapEquimentsPostions}
+                        characterInventory={characterInventory}
+                    />
+                );
             })}
         </div>
     );

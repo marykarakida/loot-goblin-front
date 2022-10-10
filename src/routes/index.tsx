@@ -7,7 +7,7 @@ import LandingPage from '../pages/Landing';
 import SignUpPage from '../pages/SignUp';
 import SignInPage from '../pages/SignIn';
 import HomePage from '../pages/Home';
-import CharacterPage from '../pages/Character';
+import InventoryPage from '../pages/Inventory';
 
 function AppRoutes() {
     return (
@@ -50,10 +50,10 @@ function AppRoutes() {
                         }
                     />
                     <Route
-                        path="/characters/:id"
+                        path="/inventories/:id"
                         element={
                             <PrivateRoute>
-                                <CharacterPage />
+                                <InventoryPage />
                             </PrivateRoute>
                         }
                     />

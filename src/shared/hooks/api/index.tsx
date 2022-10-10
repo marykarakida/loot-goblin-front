@@ -1,4 +1,6 @@
 import { useSignIn } from './useSignIn';
 import { useSignUp } from './useSignUp';
 
-export { useSignIn, useSignUp };
+import { useInventory } from './useInventory';
+
+export { useSignIn, useSignUp, useInventory };

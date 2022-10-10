@@ -1,17 +1,29 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
 
+import { useInventory } from '../../hooks';
+
 import { EquipmentData } from './Inventory';
 
-export const Equipment = ({ equipment, equipmentPosition }: { equipment: EquipmentData; equipmentPosition: number }) => {
+export const Equipment = ({ equipment, equipmentPosition }: { equipment: any; equipmentPosition: number }) => {
+    const { selectEquipment } = useInventory();
     const [, drag] = useDrag(() => ({
         type: 'equipment',
-        item: { equipmentPosition },
+        item: { equipmentId: equipment.equipment.id, equipmentPosition },
     }));
 
     return (
-        <div className="h-5 w-5 select-none bg-red-400" ref={drag}>
-            <p className="text-slate-900">{equipment.text}</p>
+        <div
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title={equipment.equipment.name}
+            ref={drag}
+            className="aspect-square w-full cursor-move select-none"
+            onClick={() => {
+                selectEquipment(equipment);
+            }}
+        >
+            <img src={equipment.equipment.picture} alt={equipment.equipment.name} />
         </div>
     );
 };

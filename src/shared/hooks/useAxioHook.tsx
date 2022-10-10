@@ -5,13 +5,13 @@ import { makeUseAxios, UseAxios } from 'axios-hooks';
 import { useRefreshToken } from './useRefreshToken';
 import { useAuth } from './useAuth';
 
+const instance = Axios.create({
+    baseURL: import.meta.env.VITE_BASE_URL,
+});
+
 export function useAxiosHook(authorization: boolean = false): { useAxios: UseAxios } {
     const refresh = useRefreshToken();
     const { getSession } = useAuth();
-
-    const instance = Axios.create({
-        baseURL: import.meta.env.VITE_BASE_URL,
-    });
 
     useEffect(() => {
         if (!authorization) return;

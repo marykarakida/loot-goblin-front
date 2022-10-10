@@ -1,3 +1,4 @@
 import { AuthProvider } from './AuthProvider';
+import { InventoryProvider } from './InventoryProvider';
 
-export { AuthProvider };
+export { AuthProvider, InventoryProvider };

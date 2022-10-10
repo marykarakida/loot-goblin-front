@@ -1,3 +1,4 @@
+import { EquipmentDetail } from './EquipmentDetail';
 import { Inventory } from './Inventory';
 
-export { Inventory };
+export { EquipmentDetail, Inventory };
