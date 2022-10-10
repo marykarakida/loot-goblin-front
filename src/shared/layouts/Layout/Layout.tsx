@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 import { useLoginPersistance } from '../../hooks';
@@ -13,7 +13,7 @@ export function Layout() {
     }
 
     return (
-        <div className="bg-fantasy-ruins min-h-screen bg-opacity-0 bg-cover bg-center bg-no-repeat">
+        <div className="h-screen bg-opacity-0">
             <div className="relative h-full px-4 py-9 2xl:container 2xl:mx-auto">
                 <Top />
                 <Outlet />
